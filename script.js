@@ -19,7 +19,13 @@ function createRow(numOfBoxes){
 function createBox(){
     const box = document.createElement("div");
     box.classList.add("box");
+    box.addEventListener("mouseover", colorBox);
+
     return box;    
+}
+
+function colorBox(e){
+    e.target.classList.add("colored");
 }
 
 createGrid(numOfBoxes);
