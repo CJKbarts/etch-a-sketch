@@ -25,6 +25,11 @@
     flex: 1;
 }
 
+.plate {
+
+    background-color: black;
+}
+
 .colored{
     background-color: black;
 }

@@ -14,7 +14,12 @@ let rainbowColor = false;
 const rainbowBtn = document.querySelector(".rainbowBtn");
 rainbowBtn.addEventListener("click", ()=> {
     rainbowColor = !rainbowColor;
-    console.log(rainbowColor);
+})
+
+let eraseColor = false;
+const eraserBtn = document.querySelector(".eraserBtn");
+eraserBtn.addEventListener("click", ()=> {
+    eraseColor = !eraseColor;
 })
 
 function resetGrid(numOfBoxes = numOfBoxesValue){
@@ -40,8 +45,7 @@ function createRow(numOfBoxes){
 function createBox(){
     const box = document.createElement("div");
     box.classList.add("box");
-    box.addEventListener("mouseover", colorBox);
-
+    box.addEventListener("mouseover", colorBox);    
     return box;    
 }
 
@@ -50,15 +54,29 @@ function deleteGrid(){
 }
 
 function colorBox(e){
-    if(e.target.classList.contains(".colored")) return;
-    let color = "black";
+    let box = e.target;
+
+    if (eraseColor){
+        if (box.classList.contains("colored")) box.classList.remove("colored");
+        box.style.backgroundColor = "white";
+        return;
+    }
+
+    if(box.classList.contains("colored")) {
+        return;
+    }; 
+
+    let color;
     if (rainbowColor) color = getRandomColor();
+    else color = "black";
     
-    e.target.style.backgroundColor = color;
-    e.target.classList.add(".colored");
+    box.style.backgroundColor = color;
+    box.classList.add("colored");
 }
 
 function getRandomColor(){
     return "#".concat(Math.floor(Math.random()*16777215).toString(16));
 }
+
+
 createGrid(numOfBoxesValue);
