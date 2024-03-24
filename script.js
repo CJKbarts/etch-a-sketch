@@ -10,6 +10,13 @@ createNewGridBtn.addEventListener("click", ()=> {
 const clearBtn = document.querySelector(".clearBtn");
 clearBtn.addEventListener("click", ()=> resetGrid());
 
+let rainbowColor = false;
+const rainbowBtn = document.querySelector(".rainbowBtn");
+rainbowBtn.addEventListener("click", ()=> {
+    rainbowColor = !rainbowColor;
+    console.log(rainbowColor);
+})
+
 function resetGrid(numOfBoxes = numOfBoxesValue){
     deleteGrid();
     createGrid(numOfBoxes);
@@ -43,7 +50,15 @@ function deleteGrid(){
 }
 
 function colorBox(e){
-    e.target.classList.add("colored");
+    if(e.target.classList.contains(".colored")) return;
+    let color = "black";
+    if (rainbowColor) color = getRandomColor();
+    
+    e.target.style.backgroundColor = color;
+    e.target.classList.add(".colored");
 }
 
+function getRandomColor(){
+    return "#".concat(Math.floor(Math.random()*16777215).toString(16));
+}
 createGrid(numOfBoxesValue);
