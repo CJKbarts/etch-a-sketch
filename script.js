@@ -14,12 +14,14 @@ let rainbowColor = false;
 const rainbowBtn = document.querySelector(".rainbowBtn");
 rainbowBtn.addEventListener("click", ()=> {
     rainbowColor = !rainbowColor;
+    rainbowBtn.classList.toggle("toggled");
 })
 
 let eraseColor = false;
 const eraserBtn = document.querySelector(".eraserBtn");
 eraserBtn.addEventListener("click", ()=> {
     eraseColor = !eraseColor;
+    eraserBtn.classList.toggle("toggled");
 })
 
 function resetGrid(numOfBoxes = numOfBoxesValue){
@@ -29,23 +31,24 @@ function resetGrid(numOfBoxes = numOfBoxesValue){
 
 function createGrid(numOfBoxes){
     for(let i = 0; i < numOfBoxes; i++){
-        gridContainer.appendChild(createRow(numOfBoxes));
+        gridContainer.appendChild(createRow(numOfBoxes, i));
     }
 }
 
-function createRow(numOfBoxes){
+function createRow(numOfBoxes, rowIndex){
     let row = document.createElement("div");
     row.classList.add("row");
     for(let i = 0; i < numOfBoxes; i++){
-        row.appendChild(createBox());
+        row.appendChild(createBox(numOfBoxes, rowIndex, i));
     }
     return row;
 }
 
-function createBox(){
+function createBox(numOfBoxes, rowIndex, columnIndex){
     const box = document.createElement("div");
     box.classList.add("box");
-    box.addEventListener("mouseover", colorBox);    
+    box.addEventListener("mouseover", colorBox);
+
     return box;    
 }
 
